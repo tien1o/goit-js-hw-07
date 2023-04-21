@@ -26,26 +26,4 @@ document.addEventListener("DOMContentLoaded", () => {
     captionsData: "alt",
     captionDelay: 250,
   });
-
-  lightbox.id = "lightbox";
-  document.body.appendChild(lightbox);
-
-  const itemsLigthbox = document.querySelectorAll(".gallery__link");
-  itemsLigthbox.forEach((item) => {
-    item.addEventListener("click", (event) => {
-      event.preventDefault();
-      lightbox.classList.add("active");
-      const itm = document.createElement("img");
-      itm.src = item.href;
-      while (lightbox.firstChild) {
-        lightbox.removeChild(lightbox.firstChild);
-      }
-      lightbox.appendChild(itm);
-    });
-  });
-
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== e.currentTarget) return;
-    lightbox.classList.remove("active");
-  });
 });
