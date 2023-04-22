@@ -15,33 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
   gallery.insertAdjacentHTML("beforeend", galleryMarkup.join(""));
   console.log(galleryItems);
 
-  const galleryLinks = document.querySelectorAll(".gallery__link");
-  galleryLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-  });
+  const onContainerClick = (e) => {
+    e.preventDefault();
 
-  const lightbox = document.createElement("div");
-  lightbox.id = "lightbox";
-  document.body.appendChild(lightbox);
+    if (e.target.classList.contains("gallery")) return;
+    const source = e.target.dataset.source;
 
-  const itemsLigthbox = document.querySelectorAll(".gallery__link");
-  itemsLigthbox.forEach((item) => {
-    item.addEventListener("click", (event) => {
-      event.preventDefault();
-      lightbox.classList.add("active");
-      const itm = document.createElement("img");
-      itm.src = item.href;
-      while (lightbox.firstChild) {
-        lightbox.removeChild(lightbox.firstChild);
-      }
-      lightbox.appendChild(itm);
-    });
-  });
+    const instance = basicLightbox.create(`
+      <img src="${source}"width="800" height="600">`);
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== e.currentTarget) return;
-    lightbox.classList.remove("active");
-  });
+    instance.show();
+  };
+
+  gallery.addEventListener("click", onContainerClick);
 });

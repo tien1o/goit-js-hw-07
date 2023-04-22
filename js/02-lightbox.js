@@ -15,14 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   gallery.insertAdjacentHTML("beforeend", galleryMarkup.join(""));
   console.log(galleryItems);
 
-  const galleryLinks = document.querySelectorAll(".gallery__link");
-  galleryLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-  });
-
-  const lightbox = new SimpleLightbox(".gallery__link", {
+  new SimpleLightbox(".gallery__link", {
     captionsData: "alt",
     captionDelay: 250,
   });
